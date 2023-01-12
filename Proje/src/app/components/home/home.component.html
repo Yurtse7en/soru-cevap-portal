@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-md-6">
+      <h4>Cevaplanmamış Sorular</h4>
+      <hr>
+      <p class="text-danger" *ngIf="mevcutGorev.length==0">Mevcut Soru Yoktur!</p>
+      <table class="table table-sm">
+        <thead class="bg-primary text-white">
+          <th>Başlık</th>
+          <th>Soru</th>
+          <th>Cevapla</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let gorev of mevcutGorev">
+            <td>{{gorev.baslik}}</td>
+            <td>{{gorev.aciklama}}</td>
+            <td>
+              <button class="btn btn-outline-primary btn-sm ms-2" (click)="TamamIptal(gorev,true)">Cevapla</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <h4>Cevaplanmış Sorular</h4>
+      <hr>
+      <p class="text-danger" *ngIf="eskiGorev.length==0">Cevaplanan Soru Yoktur!</p>
+      <table class="table table-sm">
+        <thead class="bg-secondary text-white">
+          <th>Başlık</th>
+          <th>Soru</th>
+          <th>Cevap</th>
+          <th>Geri Al</th>
+          <th>Sil</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let gorev of eskiGorev">
+            <td>{{gorev.baslik}}</td>
+            <td>{{gorev.aciklama}}</td>
+            <td>{{gorev.cevap}}</td>
+            <td>
+              <button class="btn btn-outline-secondary btn-sm ms-2" (click)="TamamIptal(gorev,false)">Geri Al</button>
+              <button class="btn btn-outline-danger btn-sm ms-2" (click)="Sil(gorev)">Sil</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-6">
+      <form [formGroup]="frm" (ngSubmit)="Kaydet()">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h4>Soru Sor</h4>
+          </div>
+          <div class="card-body">
+            <label>Başlık</label>
+            <input type="text" class="form-control" formControlName="baslik">
+            <label>Sorunuz</label>
+            <textarea class="form-control" rows="3" formControlName="aciklama"></textarea>
+            <label>Cevabınız</label>
+            <textarea class="form-control" rows="3" formControlName="cevap"></textarea>
+            <input type="checkbox" formControlName="tamam" class="form-check-input"> Cevaplandi
+          </div>
+          <div class="card-footer">
+            <input type="submit" class="btn btn-outline-primary" value="Kaydet">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
